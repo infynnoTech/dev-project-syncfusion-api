@@ -1,5 +1,5 @@
 const express = require("express");
-const api = require("./routes");
+// const api = require("./routes");
 const helmet = require("helmet");
 const fs = require("fs");
 const passport = require("passport");
@@ -9,7 +9,7 @@ require("dotenv").config();
 
 const dataPath = "./lib/jsondata.json";
 
-require("./seeder");
+// require("./seeder");
 
 var app = express();
 app.use(bodyParser.json());
@@ -36,7 +36,7 @@ app.get("/getAllTasks", (req: any, res: any) => {
 });
 
 app.post("/setAllTasks", (req: any, res: any) => {
-  console.log({tasks: req.file});
+  console.log({ tasks: req.file });
   return;
 });
 

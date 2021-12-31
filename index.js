@@ -8,18 +8,15 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 var express = require("express");
-var api = require("./routes");
+// const api = require("./routes");
 var helmet = require("helmet");
 var fs = require("fs");
 var passport = require("passport");
 var bodyParser = require("body-parser");
 var cors = require("cors");
-// import allTaskData from './lib/jsontreegriddata';
-// import allTask from './lib/jsondata.json';
 require("dotenv").config();
 var dataPath = "./lib/jsondata.json";
-// require("./lib/db");
-require("./seeder");
+// require("./seeder");
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,22 +35,13 @@ app.use(function (err, req, res, next) {
     });
 });
 app.get("/getAllTasks", function (req, res) {
-    // console.log("allTaskData", getAllTasks());
     res.send(getAllTasks());
 });
 app.post("/setAllTasks", function (req, res) {
-    // const { tasks } = req.body;
-    console.log({ tasks: req.files });
+    console.log({ tasks: req.file });
     return;
-    // const stringifyData = JSON.stringify(tasks);
-    // fs.writeFileSync(dataPath, stringifyData);
-    // res.json({
-    //   status: true,
-    //   message: "Data updated successfully."
-    // });
 });
 app.get("/add", function (req, res) {
-    // console.log("allTaskData", getAllTasks());
     var _a = req.body, parentItem = _a.parentItem, index = _a.index, level = _a.level, taskData = _a.taskData, type = _a.type;
     var tasks = getAllTasks();
     if (parentItem) {
@@ -72,7 +60,6 @@ app.get("/add", function (req, res) {
     res.status(201).send({ message: "Task added successfully" });
 });
 app.get("/update", function (req, res) {
-    // console.log("allTaskData", getAllTasks());
     var _a = req.body, parentItem = _a.parentItem, index = _a.index, level = _a.level, taskData = _a.taskData, type = _a.type;
     var tasks = getAllTasks();
     if (parentItem) {
@@ -137,7 +124,6 @@ app.get("/cut", function (req, res) {
 });
 var getAllTasks = function () {
     var jsonData = fs.readFileSync(dataPath);
-    // console.log({ jsonData });
     return JSON.parse(jsonData);
 };
 var saveAllTasks = function (data) {
